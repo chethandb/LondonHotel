@@ -5,13 +5,12 @@ namespace LandonHotel.Services
 {
     public class BookingService : IBookingService
     {
-        private readonly IBookingsRepository _bookingsRepository;
+        //private readonly IBookingsRepository _bookingsRepository;
         private readonly IRoomsRepository _roomsRepository;
 
-        public BookingService(IBookingsRepository bookingsRepository,
-                              IRoomsRepository roomsRepository)
+        public BookingService(IRoomsRepository roomsRepository)
         {
-            _bookingsRepository = bookingsRepository;
+            //_bookingsRepository = bookingsRepository;
             _roomsRepository = roomsRepository;
         }
 
@@ -20,6 +19,13 @@ namespace LandonHotel.Services
             var guestIsSmoking = booking.IsSmoking;
             var guestIsBringingPets = booking.HasPets;
             var numberOfGuests = booking.NumberOfGuests;
+
+            var room = _roomsRepository.GetRoom(roomId);
+
+            if (booking.HasPets && !room.ArePetsAllowed)
+            {
+                return false;
+            }
 
             return !guestIsSmoking;
         }
