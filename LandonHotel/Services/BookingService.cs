@@ -49,11 +49,13 @@ namespace LandonHotel.Services
             var numberOfNights = (booking.CheckOutDate - booking.CheckInDate).Days;
             decimal price = room.Rate * numberOfNights;
 
-            if (booking.CouponCode != null)
+            if (string.IsNullOrWhiteSpace(booking.CouponCode))
             {
-                var discount = _couponRepo.GetCoupon(booking.CouponCode).PercentageDiscount;
-                price = price - (price * discount / 100);
+                return price;
             }
+
+            var discount = _couponRepo.GetCoupon(booking.CouponCode).PercentageDiscount;
+            price -= (price * discount / 100);
 
             return price;
         }

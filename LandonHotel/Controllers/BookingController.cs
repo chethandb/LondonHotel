@@ -43,6 +43,8 @@ namespace LandonHotel.Controllers
                     CheckOutDate = model.CheckOutDate,
                     HasPets = model.BringingPets,
                     IsSmoking = model.IsSmoking,
+                    NumberOfGuests = model.NumberOfGuests,
+                    CouponCode = model.CouponCode,
                     RoomId = model.RoomId
                 };
 
