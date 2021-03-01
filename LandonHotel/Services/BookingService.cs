@@ -32,6 +32,11 @@ namespace LandonHotel.Services
                 return false;
             }
 
+            if (numberOfGuests > room.Capacity)
+            {
+                return false;
+            }
+
             return true;
         }
     }
