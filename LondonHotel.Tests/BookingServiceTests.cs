@@ -7,7 +7,7 @@ namespace LondonHotel.Tests
     public class BookingServiceTests
     {
         [Fact]
-        public void Test1()
+        public void IsBookingValid_NonSmoker_Valid()
         {
             var service = new BookingService(null, null);
             var isValid = service.IsBookingValid(1, new LandonHotel.Data.Booking()
@@ -16,6 +16,19 @@ namespace LondonHotel.Tests
             });
 
             Assert.True(isValid);
+
+        }
+
+        [Fact]
+        public void IsBookingValid_Smoker_InValid()
+        {
+            var service = new BookingService(null, null);
+            var isValid = service.IsBookingValid(1, new LandonHotel.Data.Booking()
+            {
+                IsSmoking = true
+            });
+
+            Assert.False(isValid);
 
         }
     }
