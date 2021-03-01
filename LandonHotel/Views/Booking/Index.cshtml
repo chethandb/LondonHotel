@@ -13,7 +13,7 @@
             <img src="/images/hotel/intro_attractions.jpg" alt="Intro Gallery Attractions Sample Pictures">
             <img class="hidesm" src="/images/hotel/intro_wedding.jpg" alt="Intro Gallery Dining Sample Pictures">
         </div>
-        <h1>Welcome to the Landon&nbsp;Hotel</h1>
+        <h1>Welcome to the London&nbsp;Hotel</h1>
     </article>
 </div><!-- welcome -->
 <form action="/Booking" method="post">
@@ -37,6 +37,7 @@
                     <li><strong>Number of Guests</strong> @Html.TextBoxFor(m => m.NumberOfGuests, new { type = "number" })</li>
                     <li><strong>Bringing Pets?</strong> @Html.CheckBoxFor(m => m.BringingPets)</li>
                     <li><strong>Smoking?</strong> @Html.CheckBoxFor(m => m.IsSmoking)</li>
+                    <li><strong>Coupon Code</strong> @Html.TextBoxFor(m => m.CouponCode)</li>
                 </ul>
             </section>
             <section class="checklist" id="services">

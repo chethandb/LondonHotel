@@ -34,7 +34,8 @@ namespace LandonHotel.Controllers
         [HttpPost]
         public IActionResult Index(BookingViewModel model)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && model.RoomId > 0)
             {
                 var booking = new Booking()
                 {
@@ -42,12 +43,17 @@ namespace LandonHotel.Controllers
                     CheckOutDate = model.CheckOutDate,
                     HasPets = model.BringingPets,
                     IsSmoking = model.IsSmoking,
+                    RoomId = model.RoomId
                 };
 
                 if (bookingService.IsBookingValid(model.RoomId, booking))
                 {
-                    return View("Success");
-                }
+                    return View("Success",
+                    new BookingSuccessViewModel
+                    {
+                        Price = bookingService.CalculateBookingPrice(booking)
+                    });
+                }               
             }
 
             model.Rooms = roomService.GetAllRooms();
