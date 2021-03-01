@@ -22,6 +22,7 @@ namespace LandonHotel.Data
         public bool HasPets { get; set; }
         public int NumberOfGuests { get; set; }
         public int RoomId { get; set; }
+        public string CouponCode { get; set; }
     }
 
     public class Coupon

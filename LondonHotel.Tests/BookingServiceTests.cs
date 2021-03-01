@@ -19,7 +19,7 @@ namespace LondonHotel.Tests
 
         private BookingService Subject()
         {
-            return new BookingService(_roomRepo.Object);
+            return new BookingService(_roomRepo.Object, new Mock<ICouponRepository>().Object);
         }
 
         [Fact]

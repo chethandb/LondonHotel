@@ -7,11 +7,14 @@ namespace LandonHotel.Services
     {
         //private readonly IBookingsRepository _bookingsRepository;
         private readonly IRoomsRepository _roomsRepository;
+        private readonly ICouponRepository _couponRepo;
 
-        public BookingService(IRoomsRepository roomsRepository)
+        public BookingService(IRoomsRepository roomsRepository,
+                              ICouponRepository couponRepo)
         {
             //_bookingsRepository = bookingsRepository;
             _roomsRepository = roomsRepository;
+            _couponRepo = couponRepo;
         }
 
         public bool IsBookingValid(int roomId, Booking booking)
@@ -42,11 +45,17 @@ namespace LandonHotel.Services
 
         public decimal CalculateBookingPrice(Booking booking)
         {
-            var roomRepo = new RoomsRepository();
-            var room = roomRepo.GetRoom(booking.RoomId);
-
+            var room = _roomsRepository.GetRoom(booking.RoomId);
             var numberOfNights = (booking.CheckOutDate - booking.CheckInDate).Days;
-            return room.Rate * numberOfNights;
+            decimal price = room.Rate * numberOfNights;
+
+            if (booking.CouponCode != null)
+            {
+                var discount = _couponRepo.GetCoupon(booking.CouponCode).PercentageDiscount;
+                price = price - (price * discount / 100);
+            }
+
+            return price;
         }
     }
 }
