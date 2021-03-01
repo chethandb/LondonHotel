@@ -15,12 +15,12 @@ namespace LandonHotel.Services
             _roomsRepository = roomsRepository;
         }
 
-        public bool CalculateBookingCost(int roomId, Booking booking)
+        public bool IsBookingValid(int roomId, Booking booking)
         {
             var guestIsSmoking = booking.IsSmoking;
             var guestIsBringingPets = booking.HasPets;
             var numberOfGuests = booking.NumberOfGuests;
-            return false;
+            return true;
         }
     }
 }
